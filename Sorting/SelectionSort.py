@@ -10,6 +10,5 @@ def SelectionSort(list):
 
 SelectionSort([8, 2, 4, 1, 6, 9, 5])
 SelectionSort([8, 2, 4, -1, 6, 9, -5])
-SelectionSort([8, 2, 4, 1,8, 6, 9, 5])
+SelectionSort([8, 2, 4, 1, 8, 6, 9, 5])
 SelectionSort([])
-
