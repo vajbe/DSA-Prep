@@ -4,7 +4,6 @@ class Node:
     self.value = value
     self.next = None
 
-
 class CircularList:
 
   def __init__(self):
