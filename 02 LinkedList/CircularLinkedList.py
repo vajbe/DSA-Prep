@@ -4,6 +4,7 @@ class Node:
     self.value = value
     self.next = None
 
+
 class CircularList:
 
   def __init__(self):
@@ -96,7 +97,5 @@ cll.insert(8, -1)
 print([node.value for node in cll])
 cll.search(8)
 cll.delete(3)
-cll.delete(-1)
-cll.delete(0)
-
+cll.delete(3)
 print([node.value for node in cll])

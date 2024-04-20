@@ -5,6 +5,10 @@ class Node:
     self.next = None
     self.value = value
 
+  def __str__(self):
+    print(self.value)
+    return str(self.value)
+
 
 class DoublyList:
 
@@ -59,11 +63,36 @@ class DoublyList:
       node = node.next
     print("Not found")
 
+  def delete(self, location):
+    if self.head is None:
+      print("List is empty")
+    else:
+      if self.head == self.tail:
+        self.tail = None
+        self.head = None
+      elif location == 0:
+        self.head = self.head.next
+        self.head.prev = None
+      elif location == -1:
+        self.tail = self.tail.prev
+        self.tail.next = None
+      else:
+        index = 0
+        node = self.head
+        while (index < location - 1):
+          index += 1
+          node = node.next
+          print(node)
+        node.next = node.next.next
+        node.next.prev = node
+
 
 list = DoublyList()
 list.create(10)
 list.insert(1, -1)
 list.insert(2, 0)
 list.insert(3, 2)
-list.search(3)
+# list.search(3)
+print([node.value for node in list])
+list.delete(2)
 print([node.value for node in list])
