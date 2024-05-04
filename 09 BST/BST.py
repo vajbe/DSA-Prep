@@ -28,6 +28,21 @@ def preOrder(rootNode):
     preOrder(rootNode.left)
     preOrder(rootNode.right)
 
+
+def inOrder(rootNode):
+    if rootNode is None:
+        return
+    inOrder(rootNode.left)
+    print(rootNode.data)
+    inOrder(rootNode.right)
+
+def postOrder(rootNode):
+    if rootNode is None:
+        return
+    postOrder(rootNode.left)
+    postOrder(rootNode.right)
+    print(rootNode.data)
+
     
 newBST = BSTNode(None)
 insertNode(newBST, 70)
@@ -39,4 +54,6 @@ insertNode(newBST, 80)
 insertNode(newBST, 100)
 insertNode(newBST, 20)
 insertNode(newBST, 40)
-preOrder(newBST)
+# preOrder(newBST)
+# inOrder(newBST)
+postOrder(newBST)
