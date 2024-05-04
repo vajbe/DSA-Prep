@@ -55,6 +55,35 @@ def search(rootNode:BSTNode, nodeValue):
     else:
         search(rootNode.right, nodeValue)
 
+def minValueNode(rootNode):
+    current = rootNode
+    while current.left is not None:
+        current = current.left
+    return current
+
+def deleteNode(rootNode: BSTNode, nodeValue:int):
+    if rootNode is None:
+        return None
+    if nodeValue < rootNode.data:
+        rootNode.left = deleteNode(rootNode.left, nodeValue)
+    elif nodeValue > rootNode.data:  
+        rootNode.right= deleteNode(rootNode.right, nodeValue)
+    else:
+        if rootNode.left is None:
+            temp = rootNode.right
+            rootNode = None
+            return temp
+        if rootNode.right is None:
+            temp = rootNode.left
+            rootNode = None
+            return temp        
+
+        temp = minValueNode(rootNode.right)
+        rootNode.data = temp.data
+        rootNode.right = deleteNode(rootNode.right, temp.data)
+    return rootNode
+    
+
 newBST = BSTNode(None)
 insertNode(newBST, 70)
 insertNode(newBST, 50)
@@ -67,5 +96,7 @@ insertNode(newBST, 20)
 insertNode(newBST, 40)
 # preOrder(newBST)
 # inOrder(newBST)
-# postOrder(newBST)
-search(newBST, 65)
+# 
+# search(newBST, 65)
+deleteNode(newBST, 100)
+postOrder(newBST)
