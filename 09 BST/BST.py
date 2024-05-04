@@ -20,12 +20,23 @@ def insertNode(rootNode, nodeValue):
          else:
             insertNode(rootNode.right, nodeValue)
     return "Node has been inserted"
-            
+
+def preOrder(rootNode):
+    if rootNode is None:
+        return
+    print(rootNode.data)
+    preOrder(rootNode.left)
+    preOrder(rootNode.right)
+
+    
 newBST = BSTNode(None)
-print(insertNode(newBST, 80))
-print(insertNode(newBST, 60))
-print(insertNode(newBST, 70))
-print(insertNode(newBST, 90))
-print(newBST.data)
-print(newBST.left.data)
-print(newBST.right.data)
+insertNode(newBST, 70)
+insertNode(newBST, 50)
+insertNode(newBST, 90)
+insertNode(newBST, 30)
+insertNode(newBST, 60)
+insertNode(newBST, 80)
+insertNode(newBST, 100)
+insertNode(newBST, 20)
+insertNode(newBST, 40)
+preOrder(newBST)
