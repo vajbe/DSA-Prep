@@ -116,8 +116,53 @@ def insertNode(rootNode: AVLNode, nodeValue: int):
     return rootNode
 
 
+def getMinValueNode(rootNode):
+    if rootNode is None or rootNode.left is None:
+        return rootNode
+    return getMinValueNode(rootNode.left)
+
+
+def deleteNode(rootNode: AVLNode, nodeValue):
+    if not rootNode:
+        return rootNode
+    elif nodeValue < rootNode.data:
+        rootNode.left = deleteNode(rootNode.left, nodeValue)
+    elif nodeValue > rootNode.data:
+        rootNode.right = deleteNode(rootNode.right, nodeValue)
+    else:
+        if rootNode.left is None:
+            temp = rootNode.right
+            rootNode = None
+            return temp
+        elif rootNode.right is None:
+            temp = rootNode.left
+            rootNode = None
+            return temp
+
+        temp = getMinValueNode(rootNode.right)
+        rootNode.data = temp.data
+        rootNode.right = deleteNode(rootNode.right, temp.data)
+    #Till now normal BST delete
+    #Just check if rebalancing is required
+
+    balance = getBalance(rootNode)
+
+    if balance > 1 and getBalance(rootNode.left) >= 0:
+        return rotateRight(rootNode)
+    if balance < -1 and getBalance(rootNode.right) <= 0:
+        return rotateLeft(rootNode)
+    if balance > 1 and getBalance(rootNode.left) < 0:
+        rootNode.left = rotateLeft(rootNode.left)
+        return rotateRight(rootNode)
+    if balance < -1 and getBalance(rootNode.right) > 0:
+        rootNode.right = rotateRight(rootNode.right)
+        return rotateLeft(rootNode)
+    return rootNode
+
+
 root = AVLNode(5)
 root = insertNode(root, 10)
 root = insertNode(root, 15)
 root = insertNode(root, 20)
+deleteNode(root, 15)
 levelOrder(root)
