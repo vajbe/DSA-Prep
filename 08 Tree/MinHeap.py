@@ -23,15 +23,33 @@ def heapifyInsert(rootNode: Heap, index: int, heapType: str) -> None:
     if index <= 1:
         return
 
-    if heapType == 'min':
-        if rootNode.customList[parentIndex] < rootNode.customList[index]:
-            rootNode.customList[parentIndex], rootNode.customList[index] = rootNode.customList[index], rootNode.customList[parentIndex]
-        heapifyInsert(rootNode, parentIndex, heapType)
-    elif heapType == 'max':
+    if heapType == "min":
         if rootNode.customList[parentIndex] > rootNode.customList[index]:
-            rootNode.customList[parentIndex], rootNode.customList[index] = rootNode.customList[index], rootNode.customList[parentIndex]
+            rootNode.customList[parentIndex], rootNode.customList[index] = (
+                rootNode.customList[index],
+                rootNode.customList[parentIndex],
+            )
+        heapifyInsert(rootNode, parentIndex, heapType)
+    elif heapType == "max":
+        if rootNode.customList[parentIndex] < rootNode.customList[index]:
+            rootNode.customList[parentIndex], rootNode.customList[index] = (
+                rootNode.customList[index],
+                rootNode.customList[parentIndex],
+            )
         heapifyInsert(rootNode, parentIndex, heapType)
 
-def insertNode(rootNode:Heap,heapType:str):
+
+def insertNode(rootNode: Heap, nodeValue: int, heapType: str):
     if rootNode.heapSize + 1 == rootNode.maxSize:
         return "Tree is full"
+    rootNode.customList[rootNode.heapSize + 1] = nodeValue
+    rootNode.heapSize += 1
+    heapifyInsert(rootNode, rootNode.heapSize, heapType)
+    return "The value has been inserted."
+
+newHeap = Heap(5)
+insertNode(newHeap, 4, "max")
+insertNode(newHeap, 5, "max")
+insertNode(newHeap, 2, "max")
+insertNode(newHeap, 1, "max")
+levelOrderTraversal(newHeap)
