@@ -102,6 +102,9 @@ def extractNode(rootNode: Heap, heapType: str):
         rootNode.heapSize -= 1
         heapifyTreeExtract(rootNode, 1, heapType)
         return extractNode
+    
+def deleteEntireBP(rootNode: Heap):
+    rootNode.customList = None
 
 
 newHeap = Heap(5)
