@@ -19,6 +19,21 @@ class Trie:
             current = node
         current.endOfString = True
 
+    def searchString(self, word):
+        current = self.root
+        for i in word:
+            node = current.children.get(i)
+            if node == None:
+                return False
+            current = node
+        if current.endOfString == True:
+            return True
+        return False
+
+
 newTrie = Trie()
 newTrie.insertString("App")
 newTrie.insertString("Appl")
+print(newTrie.searchString("App"))
+print(newTrie.searchString("Ap"))
+print(newTrie.searchString("dcf"))
