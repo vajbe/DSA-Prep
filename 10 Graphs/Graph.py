@@ -26,12 +26,22 @@ class Graph:
         for vertex in self.list:
             print(vertex, " : ", self.list[vertex])
 
+    def removeVertex(self, vertex):
+        if vertex in self.list.keys():
+            for other_vertex in self.list[vertex]:
+                if vertex in self.list[other_vertex]:
+                    self.list[other_vertex].remove(vertex)
+            del self.list[vertex]
+            return True
+        return False
+
 
 list = {"a": ["b", "c"], "b": ["a"], "c": ["a", "b"]}
 graph = Graph(list)
 graph.addVertex("d")
 graph.addEdge("c", "d")
 graph.printGraph()
-graph.removeEdge("a", "c")
+# graph.removeEdge("a", "c")
+# graph.printGraph()
+graph.removeVertex("d")
 graph.printGraph()
-
