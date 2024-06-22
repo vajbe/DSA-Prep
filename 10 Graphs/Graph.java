@@ -1,6 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class Graph {
@@ -49,7 +50,6 @@ public class Graph {
     }
 
     void bfsVisit(GraphNode node) {
-        System.out.print("Visiting BFS => ");
         LinkedList<GraphNode> list = new LinkedList<GraphNode>();
         list.add(node);
 
@@ -68,10 +68,39 @@ public class Graph {
     }
 
     public void bfs() {
+        System.out.print("BFS =>");
         for (GraphNode node : nodeList) {
             if (!node.isVisited) {
                 bfsVisit(node);
             }
         }
+        System.out.println("");
+    }
+
+    void dfsVisit(GraphNode node) {
+        Stack<GraphNode> stack = new Stack<GraphNode>();
+        stack.push(node);
+
+        while (!stack.isEmpty()) {
+            GraphNode currentNode = stack.pop();
+            currentNode.isVisited = true;
+            System.err.print(" " + currentNode.name);
+            ArrayList<GraphNode> neighbours = getNeighbours(currentNode);
+            for (GraphNode neighbour : neighbours) {
+                if (!neighbour.isVisited) {
+                    stack.push(neighbour);
+                    neighbour.isVisited = true;
+                }
+            }
+        }
+    }
+
+    public void dfs() {
+        System.out.print("DFS => ");
+        for (GraphNode node : nodeList) {
+            if (!node.isVisited)
+                dfsVisit(node);
+        }
+        System.out.println("");
     }
 }
