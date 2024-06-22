@@ -1,4 +1,7 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class Graph {
     ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
@@ -31,5 +34,44 @@ public class Graph {
         }
 
         return s.toString();
+    }
+
+    ArrayList<GraphNode> getNeighbours(GraphNode node) {
+        ArrayList<GraphNode> neighbours = new ArrayList<GraphNode>();
+        int nodeIndex = node.index;
+
+        for (int i = 0; i < adjancencyMatrix.length; i++) {
+            if (adjancencyMatrix[nodeIndex][i] == 1) {
+                neighbours.add(nodeList.get(i));
+            }
+        }
+        return neighbours;
+    }
+
+    void bfsVisit(GraphNode node) {
+        System.out.print("Visiting BFS => ");
+        LinkedList<GraphNode> list = new LinkedList<GraphNode>();
+        list.add(node);
+
+        while (!list.isEmpty()) {
+            GraphNode graphNode = list.remove(0);
+            graphNode.isVisited = true;
+            System.err.print(" " + graphNode.name);
+            ArrayList<GraphNode> neighbours = getNeighbours(graphNode);
+            for (GraphNode neighbour : neighbours) {
+                if (!neighbour.isVisited) {
+                    list.add(neighbour);
+                    neighbour.isVisited = true;
+                }
+            }
+        }
+    }
+
+    public void bfs() {
+        for (GraphNode node : nodeList) {
+            if (!node.isVisited) {
+                bfsVisit(node);
+            }
+        }
     }
 }
