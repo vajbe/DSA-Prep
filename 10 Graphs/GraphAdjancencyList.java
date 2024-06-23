@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Stack;
 
 class IGraphNode {
     String name;
@@ -42,7 +43,7 @@ class IGraph {
         return s.toString();
     }
 
-    void bfsVisit(IGraphNode node) {
+    private void bfsVisit(IGraphNode node) {
         LinkedList<IGraphNode> queue = new LinkedList<IGraphNode>();
         queue.add(node);
 
@@ -68,6 +69,32 @@ class IGraph {
         }
     }
 
+    private void dfsVisit(IGraphNode node) {
+        Stack<IGraphNode> stack = new Stack<IGraphNode>();
+        stack.push(node);
+
+        while (!stack.isEmpty()) {
+            IGraphNode currentNode = stack.pop();
+            System.out.print(" => " + currentNode.name);
+            currentNode.isVisited = true;
+            for (IGraphNode neightbour : currentNode.neighbours) {
+                if (!neightbour.isVisited) {
+                    stack.push(neightbour);
+                    neightbour.isVisited = true;
+                }
+            }
+        }
+    }
+
+    void dfs() {
+        System.out.print("DFS => ");
+        for (IGraphNode node : this.nodeList) {
+            if (!node.isVisited) {
+                dfsVisit(node);
+            }
+        }
+    }
+
 }
 
 public class GraphAdjancencyList {
@@ -87,6 +114,7 @@ public class GraphAdjancencyList {
         g.addEdge(2, 3);
         g.addEdge(3, 4);
         System.out.println(g.toString());
-        g.bfs();
+        /* g.bfs(); */
+        g.dfs();
     }
 }
