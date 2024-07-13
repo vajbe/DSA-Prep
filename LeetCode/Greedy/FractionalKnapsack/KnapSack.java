@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class KnapSack {
     static void knapSack(ArrayList<KnapSackItem> list, int capacity) {
-        Comparator<KnapSackItem> comparator = new Comparator<KnapSackItem>() {
+        Comparator<KnapSackItem> comparator  = new Comparator<KnapSackItem>() {
             @Override
             public int compare(KnapSackItem o1, KnapSackItem o2) {
                 if (o2.getRatio() > o1.getRatio()) {
