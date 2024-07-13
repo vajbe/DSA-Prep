@@ -32,6 +32,7 @@ public class KnapSack {
             }
             System.out.println(
                     "Index: " + item.getIndex() + " Value: " + item.getValue() + " Weight: " + item.getWeight()
+                            + "Ratio: " + item.getRatio()
                             + " Total Value: " + totalValue);
             if (capacity == usedCapacity)
                 break;
