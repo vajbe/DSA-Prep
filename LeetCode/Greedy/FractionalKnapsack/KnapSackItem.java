@@ -14,6 +14,7 @@ public class KnapSackItem {
         this.index = index;
         this.weight = weight;
         this.value = value;
+        this.ratio = value * 1.0 / weight;
     }
 
     public void setIndex(int index) {
