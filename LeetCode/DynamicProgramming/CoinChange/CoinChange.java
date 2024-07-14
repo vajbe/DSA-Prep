@@ -1,4 +1,6 @@
 
+package LeetCode.DynamicProgramming.CoinChange;
+
 import java.util.Arrays;
 
 public class CoinChange {
